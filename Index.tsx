@@ -1,8 +1,14 @@
 import React from "react";
-import MyComponent from "./MyComponent";
+import { SafeAreaView } from "react-native";
+import HomeScreen from "./screens/HomeScreen";
+import GlobalStyles from "./GlobalStyle";
 
 const Index = () => {
-  return <MyComponent />;
+  return (
+    <SafeAreaView style={GlobalStyles.droidSafeArea}>
+      <HomeScreen />
+    </SafeAreaView>
+  );
 };
 
 export default Index;
