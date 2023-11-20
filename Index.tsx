@@ -1,13 +1,17 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import {SafeAreaView} from "react-native";
 import HomeScreen from "./screens/HomeScreen";
 import GlobalStyles from "./GlobalStyle";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const Index = () => {
   return (
-    <SafeAreaView style={GlobalStyles.droidSafeArea}>
-      <HomeScreen />
-    </SafeAreaView>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaView style={GlobalStyles.droidSafeArea}>
+        <HomeScreen />
+      </SafeAreaView>
+    </QueryClientProvider>
   );
 };
 
