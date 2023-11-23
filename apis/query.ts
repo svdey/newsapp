@@ -7,6 +7,7 @@ export const useNewsApi = (
   from: Date = new Date(),
   to: Date = new Date(),
   sortBy: string = "popularity"
+  // category: string = "business"
 ) => {
   return useQuery({
     queryKey: ["data", q],

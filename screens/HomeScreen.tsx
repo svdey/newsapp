@@ -1,14 +1,16 @@
 import {View, Text, StyleSheet, FlatList, ImageBackground} from "react-native";
 import React from "react";
-import {Searchbar} from "react-native-paper";
+import {Searchbar, SegmentedButtons} from "react-native-paper";
 import {Ionicons} from "@expo/vector-icons";
-import {primery} from "../types/colors";
+import {backgroundColor, primery} from "../types/colors";
 import ListNewsHeader from "../components/ListNewsHeader";
 import {useNewsApi} from "../apis/query";
+import {buttonList} from "../utils/Const";
 
 export default function HomeScreen() {
   const {data} = useNewsApi();
   console.log(data);
+  const [categorys, setCategorys] = React.useState("");
   return (
     <View style={style.viewPort}>
       <View style={style.container}>
@@ -34,6 +36,13 @@ export default function HomeScreen() {
         horizontal
         renderItem={({item}) => <ItemList item={item} />}
         keyExtractor={(item) => item.url}
+        style={style.flatListStyle}
+      />
+      <SegmentedButtons
+        value={categorys}
+        onValueChange={setCategorys}
+        buttons={buttonList}
+        density="small"
       />
     </View>
   );
@@ -45,7 +54,8 @@ const ItemList: React.FC = (props) => {
     <View style={style.listNewsStyle}>
       <ImageBackground source={image} resizeMode="cover" style={style.image}>
         <View style={style.itemBody}>
-          <Text style={style.text}>{props.item.author}</Text>
+          <Text style={style.text}>By {props.item.author}</Text>
+          <Text style={style.title}>By {props.item.title}</Text>
         </View>
       </ImageBackground>
     </View>
@@ -94,8 +104,22 @@ const style = StyleSheet.create({
   itemBody: {
     flex: 1,
     backgroundColor: "#000000c1",
+    opacity: 0.7,
+    paddingHorizontal: 20,
+    paddingTop: "18%",
   },
   text: {
-    color: "snow",
+    color: backgroundColor,
+    zIndex: 20,
+    marginBottom: 10,
+  },
+  title: {
+    color: backgroundColor,
+    zIndex: 20,
+    fontSize: 20,
+  },
+  flatListStyle: {
+    // height: 220,
+    flexGrow: 0,
   },
 });
